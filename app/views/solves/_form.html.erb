@@ -1,0 +1,47 @@
+<%= form_for([@competition, @event, @round, @solve], :html => { :class => "form-stacked"}) do |f| %>
+  <% if @solve.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@solve.errors.count, "error") %> prohibited this solve from being saved:</h2>
+
+      <ul>
+      <% @solve.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :competitor_id %><br>
+    <%= f.text_field :competitor_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :round_id %><br>
+    <%= f.text_field :round_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :event_id %><br>
+    <%= f.text_field :event_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :solve_time %><br>
+    <%= f.text_field :solve_time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.select :status, ['Okay', '+2', 'DNF'] %>
+  </div>
+
+  <div class="field">
+    <%= f.label :solve_number %><br>
+    <%= f.number_field :solve_number %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

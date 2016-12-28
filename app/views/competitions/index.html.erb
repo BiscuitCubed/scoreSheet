@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Competitions</h1>
+
+<%= link_to "Events", competition_events_path(1) %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Filler</th>
+      <th>Filler</th>
+    </tr>
+  </thead>
+
+  <tbody class="alternate-row-colors">
+    <% @competitions.each do |competition| %>
+      <tr>
+        <td><%= link_to competition.name, competition %></td>
+        <td><%= link_to 'Edit', edit_competition_path(competition) %></td>
+        <td><%= link_to 'Destroy', competition, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Competition', new_competition_path %>

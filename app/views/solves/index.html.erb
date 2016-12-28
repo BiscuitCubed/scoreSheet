@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Solves</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Competitor</th>
+      <th>Event</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @solves.each do |solve| %>
+      <tr>
+        <td><%= solve.competitor_id %></td>
+        <td><%= solve.event_id %></td>
+        <td><%= link_to 'Show', solve %></td>
+        <td><%= link_to 'Edit', edit_competition_event_solve_path(@competition, @event, @solve) %></td>
+        <td><%= link_to 'Destroy', solve, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
