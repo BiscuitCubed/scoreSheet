@@ -18,7 +18,7 @@ class SolvesController < ApplicationController
 
   # GET /solves/new
   def new
-    @solve = @event.solves.new
+    @solve = @round.solves.new
   end
 
   # GET /solves/1/edit

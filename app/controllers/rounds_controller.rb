@@ -1,4 +1,6 @@
 class RoundsController < ApplicationController
+  before_action :set_competition
+  before_action :set_event
   before_action :set_round, only: [:show, :edit, :update, :destroy]
 
   # GET /rounds
@@ -10,11 +12,24 @@ class RoundsController < ApplicationController
   # GET /rounds/1
   # GET /rounds/1.json
   def show
+    @competitors = Competitor.all
+    @allEventSolves = []
+    @competitors.each do |competitor|
+      @solves = []
+      for i in 1..5
+        if competitor.solves.exists?(:competitor_id => competitor, solve_number: i)
+          @solve = competitor.solves.where(:competitor_id => competitor, solve_number: i).take
+          @solves.push(@solve)
+        end
+      end
+      @allEventSolves.push(@solves)
+    end
+    @numCompetitors = 0
   end
 
   # GET /rounds/new
   def new
-    @round = Round.new
+    @round = @event.rounds.new
   end
 
   # GET /rounds/1/edit
@@ -28,7 +43,8 @@ class RoundsController < ApplicationController
 
     respond_to do |format|
       if @round.save
-        format.html { redirect_to @round, notice: 'Round was successfully created.' }
+        byebug
+        format.html { redirect_to competition_event_round_path(@competition, @event, @round), notice: 'Round was successfully created.' }
         format.json { render :show, status: :created, location: @round }
       else
         format.html { render :new }
@@ -56,7 +72,7 @@ class RoundsController < ApplicationController
   def destroy
     @round.destroy
     respond_to do |format|
-      format.html { redirect_to rounds_url, notice: 'Round was successfully destroyed.' }
+      format.html { redirect_to competition_event_round_path(@competition, @event, @round), notice: 'Round was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +83,16 @@ class RoundsController < ApplicationController
       @round = Round.find(params[:id])
     end
 
+    def set_event
+      @event = Event.find(params[:event_id])
+    end
+
+    def set_competition
+      @competition = Competition.find(params[:competition_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def round_params
-      params.fetch(:round, {})
+      params.require(:round).permit(:event_id, :round_number)
     end
 end

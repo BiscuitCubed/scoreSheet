@@ -35,15 +35,16 @@ ActiveRecord::Schema.define(version: 20161226202907) do
   end
 
   create_table "rounds", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "round_number"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "solves", force: :cascade do |t|
     t.string   "competitor_id"
     t.string   "event_id"
-    t.decimal  "solve_time"
-    t.decimal  "solve_number"
+    t.integer  "solve_time"
+    t.integer  "solve_number"
     t.string   "status"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false

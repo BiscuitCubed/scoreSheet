@@ -2,7 +2,6 @@ Rails.application.routes.draw do
 
   resources :competitions do
     resources :competitors
-    resources :competitors
     resources :events do
       resources :rounds do
         resources :solves
