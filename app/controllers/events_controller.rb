@@ -78,7 +78,7 @@ end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
-      @event = @competition.events.find(params[:id])
+      @event = Event.find(params[:event_id])
     end
 
     def set_competition
@@ -91,6 +91,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :competition_id, :num_competitors)
+      params.require(:event).permit(:name, :competition_id, :num_competitors, :event_id)
     end
 end

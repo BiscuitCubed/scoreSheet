@@ -1,6 +1,7 @@
 class RoundsController < ApplicationController
   before_action :set_competition
   before_action :set_event
+  before_action :redirect_to_solves, except: [:new, :create, :show]
   before_action :set_round, only: [:show, :edit, :update, :destroy]
 
   # GET /rounds
@@ -39,11 +40,10 @@ class RoundsController < ApplicationController
   # POST /rounds
   # POST /rounds.json
   def create
-    @round = Round.new(round_params)
+    @round = @event.rounds.new(round_params)
 
     respond_to do |format|
       if @round.save
-        byebug
         format.html { redirect_to competition_event_round_path(@competition, @event, @round), notice: 'Round was successfully created.' }
         format.json { render :show, status: :created, location: @round }
       else
@@ -79,6 +79,11 @@ class RoundsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def redirect_to_solves
+      byebug
+      redirect_to competition_event_round_solves_path(@competition, @event, @event.rounds.where(round_number: 1))
+    end
+
     def set_round
       @round = Round.find(params[:id])
     end

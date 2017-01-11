@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20161226202907) do
 
   create_table "rounds", force: :cascade do |t|
     t.string   "round_number"
+    t.integer  "event_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
