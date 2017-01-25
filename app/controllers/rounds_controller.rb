@@ -1,6 +1,6 @@
 class RoundsController < ApplicationController
   before_action :set_competition
-  before_action :set_event
+  before_action :set_competition_event
   before_action :redirect_to_solves, except: [:new, :create, :show]
   before_action :set_round, only: [:show, :edit, :update, :destroy]
 
@@ -30,7 +30,7 @@ class RoundsController < ApplicationController
 
   # GET /rounds/new
   def new
-    @round = @event.rounds.new
+    @round = @competition_event.rounds.new
   end
 
   # GET /rounds/1/edit
@@ -40,11 +40,12 @@ class RoundsController < ApplicationController
   # POST /rounds
   # POST /rounds.json
   def create
-    @round = @event.rounds.new(round_params)
+    @round = @competition_event.rounds.new(round_params)
+    byebug
 
     respond_to do |format|
       if @round.save
-        format.html { redirect_to competition_event_round_path(@competition, @event, @round), notice: 'Round was successfully created.' }
+        format.html { redirect_to competition_competition_event_round_path(@competition, @competition_event, @round), notice: 'Round was successfully created.' }
         format.json { render :show, status: :created, location: @round }
       else
         format.html { render :new }
@@ -72,7 +73,7 @@ class RoundsController < ApplicationController
   def destroy
     @round.destroy
     respond_to do |format|
-      format.html { redirect_to competition_event_round_path(@competition, @event, @round), notice: 'Round was successfully destroyed.' }
+      format.html { redirect_to competition_competition_event_round_path(@competition, @competition_event, @round), notice: 'Round was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -81,15 +82,15 @@ class RoundsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def redirect_to_solves
       byebug
-      redirect_to competition_event_round_solves_path(@competition, @event, @event.rounds.where(round_number: 1))
+      redirect_to competition_competition_event_round_solves_path(@competition, @competition_event, @competition_event.rounds.where(round_number: 1))
     end
 
     def set_round
-      @round = Round.find(params[:id])
+      @round = @competition_event.rounds.find(params[:id])
     end
 
-    def set_event
-      @event = Event.find(params[:event_id])
+    def set_competition_event
+      @competition_event = @competition_event = CompetitionEvent.find(params[:competition_event_id])
     end
 
     def set_competition
@@ -98,6 +99,6 @@ class RoundsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def round_params
-      params.require(:round).permit(:event_id, :round_number)
+      params.require(:round).permit(:round_number, :event_id)
     end
 end

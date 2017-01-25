@@ -1,4 +1,4 @@
-<%= form_for([@competition, @event, @round, @solve], :html => { :class => "form-stacked"}) do |f| %>
+<%= form_for([@competition, @competition_event, @round, @solve], :html => { :class => "form-stacked"}) do |f| %>
   <% if @solve.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@solve.errors.count, "error") %> prohibited this solve from being saved:</h2>

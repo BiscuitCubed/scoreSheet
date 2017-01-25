@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Competitors</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+        <th>Name</th>
+        <th>Competition</th>
+        <th>Solves</th>
+        <th>Buttons</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @competitors.each do |competitor| %>
+      <tr>
+        <td><%= link_to competitor.name, competition_competition_event_competitor_path(@competition.id, @competition_event, competitor) %></td>
+        <td></td>
+        <td><% @allcompetition_eventSolves[@numCompetitors].each do |solve| %>
+          <%= solve.solve_time %>
+        <% end %></td>
+        <td><%= link_to 'Destroy', competition_competition_event_competitor_path(@competition.id, @competition_event, competitor), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Edit', edit_competition_competition_event_competitor_path(@competition.id, @competition_event, competitor) %></td>
+      </tr>
+      <% @numCompetitors = @numCompetitors + 1 %>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Round', new_competition_competition_event_round_path(@competition, @competition_event) %>

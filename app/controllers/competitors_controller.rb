@@ -1,6 +1,6 @@
 class CompetitorsController < ApplicationController
   before_action :set_competitor, only: [:show, :edit, :update, :destroy]
-  before_action :set_event
+  before_action :set_competition_event
   before_action :set_competition
   # GET /competitors
   # GET /competitors.json
@@ -34,7 +34,7 @@ class CompetitorsController < ApplicationController
 
     respond_to do |format|
       if @competitor.save
-        format.html { redirect_to competition_event_competitor_path(@competition, @event, @competitor), notice: 'Competitor was successfully created.' }
+        format.html { redirect_to competition_competition_event_competitor_path(@competition, @competition_event, @competitor), notice: 'Competitor was successfully created.' }
         format.json { render :show, status: :created, location: @competitor }
       else
         format.html { render :new }
@@ -48,7 +48,7 @@ class CompetitorsController < ApplicationController
   def update
     respond_to do |format|
       if @competitor.update(competitor_params)
-        format.html { redirect_to competition_event_competitor_path(@competition, @event, @competitor), notice: 'Competitor was successfully updated.' }
+        format.html { redirect_to competition_competition_event_competitor_path(@competition, @competition_event, @competitor), notice: 'Competitor was successfully updated.' }
         format.json { render :show, status: :ok, location: @competitor }
       else
         format.html { render :edit }
@@ -62,7 +62,7 @@ class CompetitorsController < ApplicationController
   def destroy
     @competitor.destroy
     respond_to do |format|
-      format.html { redirect_to competition_event_path(@competition, @event), notice: 'Competitor was successfully destroyed.' }
+      format.html { redirect_to competition_event_path(@competition, @competition_event), notice: 'Competitor was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -73,8 +73,8 @@ class CompetitorsController < ApplicationController
       @competitor = Competitor.find(params[:id])
     end
 
-    def set_event
-      @event = Event.find(params[:event_id])
+    def set_competition_event
+      @competition_event = CompetitionEvent.find(params[:competition_event_id])
     end
 
     def set_competition

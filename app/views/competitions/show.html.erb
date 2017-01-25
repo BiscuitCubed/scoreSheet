@@ -19,17 +19,17 @@
     </div>
 
 <!-- create a new row for each Event -->
-    <% @events.each do |event| %>
+    <% @competition_events.each do |event| %>
     <div class="row noMargin">
       <div class="col-xs-8">
         <div class="row">
-            <div class="col-xs-4"><%= link_to event.name, competition_event_path(@competition, event) %></div>
+            <div class="col-xs-4"><%= link_to event.name, competition_competition_event_path(@competition, event) %></div>
             <div class="col-xs-4"><%= event.competition_id %></div>
             <div class="col-xs-4"><%= event.num_competitors %></div>
         </div>
       </div>
         <div class="col-xs-4">
-         <%= link_to 'Edit ', edit_competition_event_path(@competition, event) %><%= link_to 'Destroy', competition_event_path(@competition, event), method: :delete, data: { confirm: 'Are you sure?' } %>
+         <%= link_to 'Edit ', edit_competition_competition_event_path(@competition, event) %><%= link_to 'Destroy', competition_competition_event_path(@competition, event), method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>
       </div>
     <% end %><br>

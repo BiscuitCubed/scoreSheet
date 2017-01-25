@@ -1,6 +1,6 @@
 class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:show, :edit, :update, :destroy]
-  before_action :set_events, only: [:show, :edit]
+  before_action :set_competition_events, only: [:show, :edit]
 
   # GET /competitions
   # GET /competitions.json
@@ -69,8 +69,8 @@ class CompetitionsController < ApplicationController
       @competition = Competition.find(params[:id])
     end
 
-    def set_events
-      @events = @competition.events
+    def set_competition_events
+      @competition_events = @competition.competition_events
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

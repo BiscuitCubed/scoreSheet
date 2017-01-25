@@ -1,10 +1,10 @@
-<%= form_for @event, :url => competition_event_path(@event) do |f| %>
-<% if @event.errors.any? %>
+<%= form_for @competition_event, :url => competition_competition_event_path(@competition_event) do |f| %>
+<% if @competition_event.errors.any? %>
   <div id="error_explanation">
-    <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
+    <h2><%= pluralize(@competition_event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
     <ul>
-    <% @event.errors.full_messages.each do |message| %>
+    <% @competition_event.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
     </ul>

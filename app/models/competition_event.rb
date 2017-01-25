@@ -1,5 +1,5 @@
-class Event < ActiveRecord::Base
-  belongs_to :competitions
+class CompetitonEvent < ActiveRecord::Base
+  belongs_to :competition
   has_many   :solves
   has_many   :competitors
   has_many   :rounds

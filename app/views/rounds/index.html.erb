@@ -12,9 +12,9 @@
   <tbody>
     <% @rounds.each do |round| %>
       <tr>
-        <td><%= link_to "#{@event.name} #{round.round_number}", competition_event_round_path(@competition, @event, round) %></td>
-        <td><%= link_to 'Edit', edit_competition_event_round_path(@competition, @event, round) %></td>
-        <td><%= link_to 'Destroy', competition_event_round_path(@competition, @event, round), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to "#{@competition_event.name} #{round.round_number}", competition_event_round_path(@competition, @competition_event, round) %></td>
+        <td><%= link_to 'Edit', edit_competition_event_round_path(@competition, @competition_event, round) %></td>
+        <td><%= link_to 'Destroy', competition_event_round_path(@competition, @competition_event, round), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -22,4 +22,4 @@
 
 <br>
 
-<%= link_to 'New Round', new_competition_event_round_path(@competition, @event, @round) %>
+<%= link_to 'New Round', new_competition_event_round_path(@competition, @competition_event, @round) %>

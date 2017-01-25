@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Events</h1>
+
+<div class="row">
+
+<!-- table header -->
+  <div class="row noMargin">
+    <div class="col-xs-8">
+      <div class="row">
+          <div class="col-xs-4">Name</div>
+          <div class="col-xs-4">Competition</div>
+          <div class="col-xs-4">Num Competitiors</div>
+      </div>
+    </div>
+      <div class="col-xs-4"></div>
+    </div>
+
+<!-- create a new row for each competition_event -->
+    <% @competition_events.each do |competition_event| %>
+    <div class="row noMargin">
+      <div class="col-xs-8">
+        <div class="row">
+            <div class="col-xs-4"><%= link_to competition_event.name, competition_competition_event_path(@competition, competition_event) %></div>
+            <div class="col-xs-4"><%= competition_event.competition_id %></div>
+            <div class="col-xs-4"><%= competition_event.num_competitors %></div>
+        </div>
+      </div>
+        <div class="col-xs-4">
+         <%= link_to 'Edit ', edit_competition_competition_event_path(@competition, competition_event) %><%= link_to 'Destroy', competition_competition_event_path(@competition, competition_event), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+    <% end %><br>
+  </div>
+<%= link_to 'New competition_event', new_competition_competition_event_path(@competition, @competition_event) %>
+</div>

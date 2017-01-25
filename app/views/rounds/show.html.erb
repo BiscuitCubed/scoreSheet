@@ -15,13 +15,13 @@
   <tbody>
     <% @competitors.each do |competitor| %>
       <tr>
-        <td><%= link_to competitor.name, competition_event_competitor_path(@competition.id, @event, competitor) %></td>
+        <td><%= link_to competitor.name, competition_event_competitor_path(@competition.id, @competition_event, competitor) %></td>
         <td></td>
         <td><% @allEventSolves[@numCompetitors].each do |solve| %>
           <%= solve.solve_time %>
         <% end %></td>
-        <td><%= link_to 'Destroy', competition_event_competitor_path(@competition.id, @event, competitor), method: :delete, data: { confirm: 'Are you sure?' } %>
-        <%= link_to 'Edit', edit_competition_event_competitor_path(@competition.id, @event, competitor) %></td>
+        <td><%= link_to 'Destroy', competition_event_competitor_path(@competition.id, @competition_event, competitor), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Edit', edit_competition_event_competitor_path(@competition.id, @competition_event, competitor) %></td>
       </tr>
       <% @numCompetitors = @numCompetitors + 1 %>
     <% end %>

@@ -1,6 +1,6 @@
-class CreateEvents < ActiveRecord::Migration
+class CreateCompetitionEvent < ActiveRecord::Migration
   def change
-    create_table :events do |t|
+    create_table :competition_events do |t|
       t.string :name
       t.integer :competition_id
       t.integer :num_competitors

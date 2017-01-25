@@ -1,6 +1,6 @@
 class SolvesController < ApplicationController
   before_action :set_competition
-  before_action :set_event
+  before_action :set_competition_event
   before_action :set_competitor
   before_action :set_round
   before_action :set_solve, only: [:show, :edit, :update, :destroy]
@@ -32,7 +32,7 @@ class SolvesController < ApplicationController
 
     respond_to do |format|
       if @solve.save
-        format.html { redirect_to competition_event_path(@competition, @event), notice: 'Solve was successfully created.' }
+        format.html { redirect_to competition_competition_event_path(@competition, @competition_event), notice: 'Solve was successfully created.' }
         format.json { render :show, status: :created, location: @solve }
       else
         format.html { render :new }
@@ -71,8 +71,8 @@ class SolvesController < ApplicationController
       @solve = Solve.find(params[:id])
     end
 
-    def set_event
-      @event = Event.find(params[:event_id])
+    def set_competition_event
+      @competition_event = @competition_event = CompetitionEvent.find(params[:competition_event_id])
     end
 
     def set_competitor
@@ -89,6 +89,6 @@ class SolvesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def solve_params
-      params.require(:solve).permit(:round_id, :event_id, :solve_time, :solve_number, :status)
+      params.require(:solve).permit(:round_id, :competition_event_id, :solve_time, :solve_number, :status)
     end
 end
