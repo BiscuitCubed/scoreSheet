@@ -1,4 +1,4 @@
-class CreateCompetitionEvent < ActiveRecord::Migration
+class CreateCompetitionEvents < ActiveRecord::Migration
   def change
     create_table :competition_events do |t|
       t.string :name

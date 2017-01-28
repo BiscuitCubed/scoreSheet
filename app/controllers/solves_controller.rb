@@ -1,7 +1,7 @@
 class SolvesController < ApplicationController
   before_action :set_competition
   before_action :set_competition_event
-  before_action :set_competitor
+  before_action :set_competitor, except: [:index]
   before_action :set_round
   before_action :set_solve, only: [:show, :edit, :update, :destroy]
 

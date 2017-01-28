@@ -30,7 +30,7 @@ class RoundsController < ApplicationController
 
   # GET /rounds/new
   def new
-    @round = @competition_event.rounds.new
+    @round = @competition_event.rounds.build
   end
 
   # GET /rounds/1/edit
@@ -40,8 +40,10 @@ class RoundsController < ApplicationController
   # POST /rounds
   # POST /rounds.json
   def create
-    @round = @competition_event.rounds.new(round_params)
     byebug
+    @round = @competition_event.rounds.build(round_params)
+    @round.competition_event_id = @competition_event.id
+byebug
 
     respond_to do |format|
       if @round.save
@@ -82,7 +84,7 @@ class RoundsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def redirect_to_solves
       byebug
-      redirect_to competition_competition_event_round_solves_path(@competition, @competition_event, @competition_event.rounds.where(round_number: 1))
+      redirect_to competition_competition_event_round_solves_path(@competition, @competition_event, Round.where(round_number: 1, competition_event_id: params[:competition_event_id]))
     end
 
     def set_round
@@ -99,6 +101,6 @@ class RoundsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def round_params
-      params.require(:round).permit(:round_number, :event_id)
+      params.require(:round).permit(:round_number, :competition_event_id)
     end
 end

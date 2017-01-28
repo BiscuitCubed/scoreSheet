@@ -1,4 +1,4 @@
-class CompetitonEvent < ActiveRecord::Base
+class CompetitionEvent < ActiveRecord::Base
   belongs_to :competition
   has_many   :solves
   has_many   :competitors
