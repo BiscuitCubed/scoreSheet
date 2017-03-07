@@ -14,3 +14,7 @@
  *= require_self
  *= require bootstrap
  */
+
+.no-padding{
+  padding: 0px;
+}

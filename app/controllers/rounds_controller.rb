@@ -40,10 +40,8 @@ class RoundsController < ApplicationController
   # POST /rounds
   # POST /rounds.json
   def create
-    byebug
     @round = @competition_event.rounds.build(round_params)
     @round.competition_event_id = @competition_event.id
-byebug
 
     respond_to do |format|
       if @round.save
@@ -83,8 +81,7 @@ byebug
   private
     # Use callbacks to share common setup or constraints between actions.
     def redirect_to_solves
-      byebug
-      redirect_to competition_competition_event_round_solves_path(@competition, @competition_event, Round.where(round_number: 1, competition_event_id: params[:competition_event_id]))
+      redirect_to competition_competition_event_round_solves_path(@competition, @competition_event, Round.where(round_number: 1, competition_event_id: params[:competition_event_id])[0].id)
     end
 
     def set_round

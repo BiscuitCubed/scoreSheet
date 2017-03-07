@@ -11,18 +11,31 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="row">
+    <div class="col-xs-1">
+      <div class="field">
+        3x3 <br>
+        <%= f.check_box :e_3x3 %>
+      </div>
+    </div>
+
+    <div class="col-xs-1">
+      <div class="field">
+        2x2 <br>
+        <%= f.check_box :e_2x2 %>
+      </div>
+    </div>
+
+    <div class="col-xs-1">
+      <div class="field">
+        Skewb <br>
+        <%= f.check_box :e_skewb %>
+      </div>
+    </div>
+
+    <div class="col-xs-9"></div>
   </div>
-  <div class="field">
-    <%= f.label :competition_id %><br>
-    <%= f.number_field :competition_id %>
-  </div>
-  <div class="field">
-    <%= f.label :num_competitors %><br>
-    <%= f.number_field :num_competitors %>
-  </div>
+
   <div class="actions">
     <%= f.submit%>
   </div>

@@ -1,12 +1,13 @@
 class CompetitionEventsController < ApplicationController
   before_action :set_competition
   before_action :set_competition_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_competition_events, only: [:new]
   before_action :set_competitors, only: [:show]
 
   # GET /competition_events
   # GET /competition_events.json
   def index
-    @competition_events = competition_event.all
+    @competition_events = CompetitionEvent.all
   end
 
   # GET /competition_events/1
@@ -29,6 +30,7 @@ end
   # GET /competition_events/new
   def new
     @competition_event = @competition.competition_events.new
+    @meta_events = ["e_3x3", "e_2x2", "e_skewb"]
   end
 
   # GET /competition_events/1/edit
@@ -38,17 +40,28 @@ end
   # POST /competition_events
   # POST /competition_events.json
   def create
-    @competition_event = @competition.competition_events.new(competition_event_params)
+    @meta_events = ["e_3x3", "e_2x2", "e_skewb"]
+    @errors = []
 
-    respond_to do |format|
-      if @competition_event.save
-        format.html { redirect_to competition_competition_event_path(@competition, @competition_event), notice: 'competition_event was successfully created.' }
-        format.json { render :show, status: :created, location: @competition_event }
-      else
-        format.html { render :new }
-        format.json { render json: @competition_event.errors, status: :unprocessable_entity }
+    @meta_events.each do |event|
+      if params["competition_event"][event] == "1"
+        @competition_event = @competition.competition_events.new(competition_event_params)
+        @competition_event.name = event[2..-1]
+        @competition_event.num_competitors = 0
+
+        if @competition_event.save
+        else
+          @errors.push(@competition_event.errors)
+        end
       end
     end
+
+redirect_to competition_path(@competition)
+
+
+
+
+
   end
 
   # PATCH/PUT /competition_events/1
@@ -81,6 +94,10 @@ end
       @competition_event = @competition.competition_events.find(params[:id])
     end
 
+    def set_competition_events
+      @competition_events = @competition.competition_events.all
+    end
+
     def set_competition
       @competition = Competition.find(params[:competition_id])
     end
@@ -91,6 +108,6 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def competition_event_params
-      params.require(:competition_event).permit(:name, :competition_id, :num_competitors)
+      params.require(:competition_event).permit(:name, :competition_id, :num_competitors, :e_3x3, :e_2x2, :e_skewb)
     end
 end

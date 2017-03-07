@@ -11,12 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170114163317) do
+ActiveRecord::Schema.define(version: 20170131221808) do
+
+  create_table "averages", force: :cascade do |t|
+    t.integer  "time"
+    t.integer  "competitor_id"
+    t.integer  "round_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "competition_events", force: :cascade do |t|
     t.string   "name"
     t.integer  "competition_id"
     t.integer  "num_competitors"
+    t.integer  "e_3x3"
+    t.integer  "e_2x2"
+    t.integer  "e_skewb"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

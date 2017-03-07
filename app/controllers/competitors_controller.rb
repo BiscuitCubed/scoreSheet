@@ -1,6 +1,5 @@
 class CompetitorsController < ApplicationController
   before_action :set_competitor, only: [:show, :edit, :update, :destroy]
-  before_action :set_competition_event
   before_action :set_competition
   # GET /competitors
   # GET /competitors.json
@@ -31,10 +30,11 @@ class CompetitorsController < ApplicationController
   # POST /competitors.json
   def create
     @competitor = Competitor.new(competitor_params)
+    @competitor.competition_id = params[:competition_id]
 
     respond_to do |format|
       if @competitor.save
-        format.html { redirect_to competition_competition_event_competitor_path(@competition, @competition_event, @competitor), notice: 'Competitor was successfully created.' }
+        format.html { redirect_to competition_competitor_path(@competition, @competitor), notice: 'Competitor was successfully created.' }
         format.json { render :show, status: :created, location: @competitor }
       else
         format.html { render :new }
@@ -60,9 +60,10 @@ class CompetitorsController < ApplicationController
   # DELETE /competitors/1
   # DELETE /competitors/1.json
   def destroy
+    byebug
     @competitor.destroy
     respond_to do |format|
-      format.html { redirect_to competition_event_path(@competition, @competition_event), notice: 'Competitor was successfully destroyed.' }
+      format.html { redirect_to competition_competitor_path(@competition, @competitor), notice: 'Competitor was successfully deleted.' }
       format.json { head :no_content }
     end
   end
@@ -73,16 +74,12 @@ class CompetitorsController < ApplicationController
       @competitor = Competitor.find(params[:id])
     end
 
-    def set_competition_event
-      @competition_event = CompetitionEvent.find(params[:competition_event_id])
-    end
-
     def set_competition
       @competition = Competition.find(params[:competition_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def competitor_params
-      params.require(:competitor).permit(:name, :competition_id)
+      params.require(:competitor).permit(:name, :competition_id, :e_3x3)
     end
 end

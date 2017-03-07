@@ -1,7 +1,8 @@
 class SolvesController < ApplicationController
   before_action :set_competition
   before_action :set_competition_event
-  before_action :set_competitor, except: [:index]
+  before_action :set_competitor, except: [:index, :new]
+  before_action :set_competitors
   before_action :set_round
   before_action :set_solve, only: [:show, :edit, :update, :destroy]
 
@@ -14,11 +15,14 @@ class SolvesController < ApplicationController
   # GET /solves/1
   # GET /solves/1.json
   def show
+
   end
 
   # GET /solves/new
   def new
-    @solve = @round.solves.new
+    byebug
+    @solve = @round.solves.build
+    render :layout => "new"
   end
 
   # GET /solves/1/edit
@@ -77,6 +81,10 @@ class SolvesController < ApplicationController
 
     def set_competitor
       @competitor = Competitor.find(params[:competitor_id])
+    end
+
+    def set_competitors
+      @competitors = Competitor.all
     end
 
     def set_round

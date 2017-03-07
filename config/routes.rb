@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :competition_gettogethers
   resources :competitions do
-    resources :competitors
+    resources :competitors do
+      resources :averages, except: [:new, :create]
+    end
     resources :competition_events do
       resources :rounds do
         resources :solves

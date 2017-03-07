@@ -14,11 +14,11 @@
   <tbody>
     <% @competitors.each do |competitor| %>
       <tr>
-        <td><%= competitor.name %></td>
+        <td><%= link_to competitor.name, competition_competitor_path(@competition, competitor)  %></td>
         <td><%= competitor.competition_id %></td>
-        <td><%= link_to 'Show', competitor %></td>
-        <td><%= link_to 'Edit', edit_competitor_path(competitor) %></td>
-        <td><%= link_to 'Destroy', competitor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', competition_competitors_path(@competition) %></td>
+        <td><%= link_to 'Edit', edit_competition_competitor_path(@competition, competitor) %></td>
+        <td><%= link_to 'Destroy', competition_competitor_path(@competition, competitor), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Competitor', new_competition_event_competitor_path(@competition, @competition_event) %>
+<%= link_to 'New Competitor', new_competition_competitor_path(@competition, @competition_event) %>

@@ -70,8 +70,9 @@ class CompetitionsController < ApplicationController
     end
 
     def set_competition_events
-      @competition_events = @competition.competition_events
+      @competition_events = @competition.competition_events.all
     end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def competition_params
