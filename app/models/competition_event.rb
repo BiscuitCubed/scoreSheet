@@ -4,7 +4,5 @@ class CompetitionEvent < ActiveRecord::Base
   has_many   :competitors
   has_many   :rounds
 
-  attr_accessor :e_3x3
-  attr_accessor :e_2x2
-  attr_accessor :e_skewb
+  attr_accessor :e_3x3, :e_2x2, :e_skewb
 end

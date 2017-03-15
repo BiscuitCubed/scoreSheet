@@ -31,6 +31,14 @@ end
   def new
     @competition_event = @competition.competition_events.new
     @meta_events = ["e_3x3", "e_2x2", "e_skewb"]
+
+    # for each event that already has a record created, remove it from the meta_events array.
+    @competition.competition_events.each do |event|
+      @event_name_plus_event_tag = "e_" + "#{event.name}"
+
+      @meta_events.delete(@event_name_plus_event_tag)
+    end
+    @event_count = 0
   end
 
   # GET /competition_events/1/edit

@@ -12,28 +12,48 @@
   <% end %>
 
   <div class="row">
-    <div class="col-xs-1">
-      <div class="field">
-        3x3 <br>
-        <%= f.check_box :e_3x3 %>
-      </div>
-    </div>
 
-    <div class="col-xs-1">
-      <div class="field">
-        2x2 <br>
-        <%= f.check_box :e_2x2 %>
-      </div>
-    </div>
+<!-- for each event that does not already have a record, create a checkbox and title -->
+<% @meta_events.each do |event| %>
 
-    <div class="col-xs-1">
-      <div class="field">
-        Skewb <br>
-        <%= f.check_box :e_skewb %>
-      </div>
-    </div>
+<div class="col-xs-1">
+  <div class="field">
+    <%= event[2..-1] %> <br>
+    <%= f.check_box event %>
+  </div>
+</div>
 
-    <div class="col-xs-9"></div>
+<% @event_count = @event_count + 1 %>
+<% end %>
+
+
+
+
+
+
+
+
+<% @meta_events.each do |event| %>
+
+<% end %>
+<%= select_tag "events", options_from_collection_for_select(@meta_events, "events", "events") %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="col-xs-<%= "#{12 - @event_count}" %>"></div>
   </div>
 
   <div class="actions">
